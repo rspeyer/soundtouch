@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C2634E57-FCAB-4E07-ACED-3E29D4D1AF05</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SoundTouch</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1E45D683-BAA6-4A49-8205-D8E7B8C4468A</key>
+		<string>http://svn.code.sf.net/p/soundtouch/code/trunk</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SoundTouch.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1E45D683-BAA6-4A49-8205-D8E7B8C4468A</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>1E45D683-BAA6-4A49-8205-D8E7B8C4468A</key>
+		<string>http://svn.code.sf.net/p/soundtouch/code</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://svn.code.sf.net/p/soundtouch/code/trunk/SoundTouch/SoundTouch.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1E45D683-BAA6-4A49-8205-D8E7B8C4468A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1E45D683-BAA6-4A49-8205-D8E7B8C4468A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>soundtouch</string>
+		</dict>
+	</array>
+</dict>
+</plist>
