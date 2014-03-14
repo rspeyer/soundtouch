@@ -54,9 +54,9 @@ typedef unsigned long   ulong;
 #define SOUNDTOUCH_ALIGN_POINTER_16(x)      ( ( (ulongptr)(x) + 15 ) & ~(ulongptr)15 )
 
 
-#if (defined(__GNUC__) && !defined(ANDROID) && !defined(IOS))
+#if (defined(__GNUC__) && (!defined(ANDROID) && !defined(TARGET_OS_IPHONE) && !defined(IOS)))
     // In GCC, include soundtouch_config.h made by config scritps.
-    // Skip this in Android compilation that uses GCC but without configure scripts.
+    // Skip this in Android and iOS compilation that uses GCC but without configure scripts.
     #include "soundtouch_config.h"
 #endif
 
@@ -96,7 +96,7 @@ namespace soundtouch
         #define SOUNDTOUCH_INTEGER_SAMPLES      1
     #endif
 
-    #if !(SOUNDTOUCH_INTEGER_SAMPLES || SOUNDTOUCH_FLOAT_SAMPLES)
+    #if !defined(SOUNDTOUCH_INTEGER_SAMPLES) && !defined(SOUNDTOUCH_FLOAT_SAMPLES)
        
         /// Choose either 32bit floating point or 16bit integer sampletype
         /// by choosing one of the following defines, unless this selection 
