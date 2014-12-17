@@ -64,7 +64,13 @@ typedef unsigned long   ulong;
     // if these aren't defined already by Windows headers, define now
 
 #if defined(__APPLE__)
-   typedef signed char BOOL;
+#if !defined(OBJC_HIDE_64) && TARGET_OS_IPHONE && __LP64__
+typedef bool BOOL;
+#else
+typedef signed char BOOL;
+// BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C"
+// even if -funsigned-char is used.
+#endif
 #else
    typedef int BOOL;
 #endif 
