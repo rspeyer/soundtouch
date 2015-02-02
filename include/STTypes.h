@@ -58,27 +58,10 @@ typedef unsigned long   ulong;
     // In GCC, include soundtouch_config.h made by config scritps.
     // Skip this in Android and iOS compilation that uses GCC but without configure scripts.
     #include "soundtouch_config.h"
+#elif defined(TARGET_OS_IPHONE) || defined(IOS)
+    #include <CoreFoundation/CoreFoundation.h>
+    #include <objc/objc.h>
 #endif
-
-#ifndef _WINDEF_
-    // if these aren't defined already by Windows headers, define now
-
-#if defined(__APPLE__)
-#if !defined(OBJC_HIDE_64) && TARGET_OS_IPHONE && __LP64__
-typedef bool BOOL;
-#else
-typedef signed char BOOL;
-// BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C"
-// even if -funsigned-char is used.
-#endif
-#else
-   typedef int BOOL;
-#endif 
-
-    #define FALSE   0
-    #define TRUE    1
-
-#endif  // _WINDEF_
 
 
 namespace soundtouch
