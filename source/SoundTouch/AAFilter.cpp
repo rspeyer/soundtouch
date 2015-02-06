@@ -223,9 +223,12 @@ uint AAFilter::evaluate(FIFOSampleBuffer &dest, FIFOSampleBuffer &src) const
 
     numSrcSamples = src.numSamples();
     psrc = src.ptrBegin();
-    pdest = dest.ptrEnd(numSrcSamples);
+    int causeId = rand();
+    printf("AAFilter(%p)::evaluate numSrcSamples=%u cause=%x\n", &dest, numSrcSamples, causeId);
+    pdest = dest.ptrEnd(numSrcSamples, causeId);
     assert(psrc != NULL);
     assert(pdest != NULL);
+    printf("AARFilter::evaluate psrc=%hd, pdest=%hd cause=%x\n", psrc[0], pdest[0], causeId);
     result = pFIR->evaluate(pdest, psrc, numSrcSamples, numChannels);
     src.receiveSamples(result);
     dest.putSamples(result);

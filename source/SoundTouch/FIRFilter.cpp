@@ -142,7 +142,8 @@ uint FIRFilter::evaluateFilterMono(SAMPLETYPE *dest, const SAMPLETYPE *src, uint
     assert(length != 0);
 
     end = numSamples - length;
-    for (j = 0; j < end; j ++) 
+    printf("FIRFilter::evaluateFilterMono BEFORE dest=%p src=%p numSamples=%u end=%u length=%u\n", dest, src, numSamples, end, length);
+    for (j = 0; j < end; j ++)
     {
         assert(src != NULL);
         sum = 0;
@@ -164,6 +165,7 @@ uint FIRFilter::evaluateFilterMono(SAMPLETYPE *dest, const SAMPLETYPE *src, uint
         dest[j] = (SAMPLETYPE)sum;
         src ++;
     }
+    printf("FIRFIlter::evaluateFilterMono AFTER dest=%p src=%p numSamples=%u\n", dest, src, numSamples);
     return end;
 }
 

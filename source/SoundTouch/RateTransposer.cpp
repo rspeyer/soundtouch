@@ -227,8 +227,10 @@ int TransposerBase::transpose(FIFOSampleBuffer &dest, FIFOSampleBuffer &src)
     int numSrcSamples = src.numSamples();
     int sizeDemand = (int)((float)numSrcSamples / rate) + 8;
     int numOutput;
+    int causeId = rand();
+    printf("TransposerBase::transpose cause=%x\n", causeId);
     SAMPLETYPE *psrc = src.ptrBegin();
-    SAMPLETYPE *pdest = dest.ptrEnd(sizeDemand);
+    SAMPLETYPE *pdest = dest.ptrEnd(sizeDemand, causeId);
 
 #ifndef USE_MULTICH_ALWAYS
     if (numChannels == 1)

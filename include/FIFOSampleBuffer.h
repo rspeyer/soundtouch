@@ -85,7 +85,7 @@ private:
     void rewind();
 
     /// Ensures that the buffer has capacity for at least this many samples.
-    void ensureCapacity(uint capacityRequirement);
+    void ensureCapacity(uint capacityRequirement, int causeId);
 
     /// Returns current capacity.
     uint getCapacity() const;
@@ -118,11 +118,11 @@ public:
     /// to increase the sample count afterwards, by calling  the 
     /// 'putSamples(numSamples)' function.
     SAMPLETYPE *ptrEnd(
-                uint slackCapacity   ///< How much free capacity (in samples) there _at least_ 
+                uint slackCapacity,   ///< How much free capacity (in samples) there _at least_
                                      ///< should be so that the caller can succesfully insert the 
                                      ///< desired samples to the buffer. If necessary, the function 
                                      ///< grows the buffer size to comply with this requirement.
-                );
+                int causeId);
 
     /// Adds 'numSamples' pcs of samples from the 'samples' memory position to
     /// the sample buffer.

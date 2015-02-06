@@ -544,7 +544,9 @@ void TDStretch::processSamples()
         // samples in 'midBuffer' using sliding overlapping
         // ... first partially overlap with the end of the previous sequence
         // (that's in 'midBuffer')
-        overlap(outputBuffer.ptrEnd((uint)overlapLength), inputBuffer.ptrBegin(), (uint)offset);
+        int causeId = rand();
+        printf("TDStretch(%p)::processSamples nSamples=%u cause=%x\n", &outputBuffer, (uint)overlapLength, causeId);
+        overlap(outputBuffer.ptrEnd((uint)overlapLength, causeId), inputBuffer.ptrBegin(), (uint)offset);
         outputBuffer.putSamples((uint)overlapLength);
 
         // ... then copy sequence samples from 'inputBuffer' to output:

@@ -62,7 +62,7 @@ FIFOSampleBuffer::FIFOSampleBuffer(int numChannels)
     samplesInBuffer = 0;
     bufferPos = 0;
     channels = (uint)numChannels;
-    ensureCapacity(32);     // allocate initial capacity 
+    ensureCapacity(32, 0XAAA);     // allocate initial capacity
 }
 
 
@@ -104,7 +104,9 @@ void FIFOSampleBuffer::rewind()
 // the sample buffer.
 void FIFOSampleBuffer::putSamples(const SAMPLETYPE *samples, uint nSamples)
 {
-    memcpy(ptrEnd(nSamples), samples, sizeof(SAMPLETYPE) * nSamples * channels);
+    int causeId = rand();
+    printf("FIFOSampleBuffer(%p)::putSamples nSamples=%u cause=%x\n", this, nSamples, causeId);
+    memcpy(ptrEnd(nSamples, causeId), samples, sizeof(SAMPLETYPE) * nSamples * channels);
     samplesInBuffer += nSamples;
 }
 
@@ -118,9 +120,10 @@ void FIFOSampleBuffer::putSamples(const SAMPLETYPE *samples, uint nSamples)
 void FIFOSampleBuffer::putSamples(uint nSamples)
 {
     uint req;
-
+    
+    printf("FIFOSampleBuffer(%p)::putSamples nSamples=%u\n", this, nSamples);
     req = samplesInBuffer + nSamples;
-    ensureCapacity(req);
+    ensureCapacity(req, 0XBBB);
     samplesInBuffer += nSamples;
 }
 
@@ -137,9 +140,10 @@ void FIFOSampleBuffer::putSamples(uint nSamples)
 // When using this function as means for inserting new samples, also remember 
 // to increase the sample count afterwards, by calling  the 
 // 'putSamples(numSamples)' function.
-SAMPLETYPE *FIFOSampleBuffer::ptrEnd(uint slackCapacity) 
+SAMPLETYPE *FIFOSampleBuffer::ptrEnd(uint slackCapacity, int causeId)
 {
-    ensureCapacity(samplesInBuffer + slackCapacity);
+    printf("FIFOSampleBuffer(%p)::ptrEnd slack=%u samplesInBuffer=%u buffer=%p cause=%x\n", this, slackCapacity, samplesInBuffer, buffer, causeId);
+    ensureCapacity(samplesInBuffer + slackCapacity, causeId);
     return buffer + samplesInBuffer * channels;
 }
 
@@ -162,7 +166,7 @@ SAMPLETYPE *FIFOSampleBuffer::ptrBegin()
 // 'capacityRequirement' number of samples. The buffer is grown in steps of
 // 4 kilobytes to eliminate the need for frequently growing up the buffer,
 // as well as to round the buffer size up to the virtual memory page size.
-void FIFOSampleBuffer::ensureCapacity(uint capacityRequirement)
+void FIFOSampleBuffer::ensureCapacity(uint capacityRequirement, int causeId)
 {
     SAMPLETYPE *tempUnaligned, *temp;
 
@@ -171,6 +175,7 @@ void FIFOSampleBuffer::ensureCapacity(uint capacityRequirement)
         // enlarge the buffer in 4kbyte steps (round up to next 4k boundary)
         sizeInBytes = (capacityRequirement * channels * sizeof(SAMPLETYPE) + 4095) & (uint)-4096;
         assert(sizeInBytes % 2 == 0);
+        printf("FIFOSampleBuffer(%p)::ensureCapacity sizeInBytes=%u capacity=%u buffer=%p cause=%x\n", this, sizeInBytes, capacityRequirement, buffer, causeId);
         tempUnaligned = new SAMPLETYPE[sizeInBytes / sizeof(SAMPLETYPE) + 16 / sizeof(SAMPLETYPE)];
         if (tempUnaligned == NULL)
         {
@@ -178,6 +183,7 @@ void FIFOSampleBuffer::ensureCapacity(uint capacityRequirement)
         }
         // Align the buffer to begin at 16byte cache line boundary for optimal performance
         temp = (SAMPLETYPE *)SOUNDTOUCH_ALIGN_POINTER_16(tempUnaligned);
+        printf("FIFOSampleBuffer(%p)::ensureCapacity temp=%p tempUnaligned=%p cause=%x\n", this, temp, tempUnaligned, causeId);
         if (samplesInBuffer)
         {
             memcpy(temp, ptrBegin(), samplesInBuffer * channels * sizeof(SAMPLETYPE));
@@ -185,6 +191,7 @@ void FIFOSampleBuffer::ensureCapacity(uint capacityRequirement)
         delete[] bufferUnaligned;
         buffer = temp;
         bufferUnaligned = tempUnaligned;
+        printf("FIFOSampleBuffer(%p)::ensureCapacity buffer=%p cause=%x\n", this, buffer, causeId);
         bufferPos = 0;
     } 
     else 
