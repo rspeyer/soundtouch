@@ -232,10 +232,8 @@ uint FIFOSampleBuffer::receiveSamples(uint maxSamples)
 {
     if (maxSamples >= samplesInBuffer)
     {
-        uint temp;
-
-        temp = samplesInBuffer;
-        samplesInBuffer = 0;
+        uint temp = samplesInBuffer;
+        clear();
         return temp;
     }
 
