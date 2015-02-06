@@ -144,6 +144,7 @@ uint FIRFilter::evaluateFilterMono(SAMPLETYPE *dest, const SAMPLETYPE *src, uint
     end = numSamples - length;
     for (j = 0; j < end; j ++) 
     {
+        assert(src != NULL);
         sum = 0;
         for (i = 0; i < length; i += 4) 
         {
@@ -257,6 +258,8 @@ uint FIRFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSample
 {
     assert(length > 0);
     assert(lengthDiv8 * 8 == length);
+    assert(dest != NULL);
+    assert(src != NULL);
 
     if (numSamples < length) return 0;
 

@@ -241,7 +241,8 @@ uint FIFOSampleBuffer::receiveSamples(uint maxSamples)
 
     samplesInBuffer -= maxSamples;
     bufferPos += maxSamples;
-
+    assert(bufferPos < getCapacity());
+    
     return maxSamples;
 }
 

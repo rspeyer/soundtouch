@@ -201,6 +201,8 @@ void AAFilter::calculateCoeffs()
 // smaller than the amount of input samples.
 uint AAFilter::evaluate(SAMPLETYPE *dest, const SAMPLETYPE *src, uint numSamples, uint numChannels) const
 {
+    assert(src != NULL);
+    assert(dest != NULL);
     return pFIR->evaluate(dest, src, numSamples, numChannels);
 }
 
@@ -222,6 +224,8 @@ uint AAFilter::evaluate(FIFOSampleBuffer &dest, FIFOSampleBuffer &src) const
     numSrcSamples = src.numSamples();
     psrc = src.ptrBegin();
     pdest = dest.ptrEnd(numSrcSamples);
+    assert(psrc != NULL);
+    assert(pdest != NULL);
     result = pFIR->evaluate(pdest, psrc, numSrcSamples, numChannels);
     src.receiveSamples(result);
     dest.putSamples(result);
