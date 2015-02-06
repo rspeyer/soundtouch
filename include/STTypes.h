@@ -39,8 +39,7 @@
 #ifndef STTypes_H
 #define STTypes_H
 
-typedef unsigned int    uint;
-typedef unsigned long   ulong;
+typedef unsigned long ulong;
 
 // Patch for MinGW: on Win64 long is 32-bit
 #ifdef _WIN64
