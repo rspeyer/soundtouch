@@ -1,0 +1,7 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+os: linux
+
+script: ./bootstrap && ./configure && make
