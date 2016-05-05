@@ -1,7 +1,3 @@
-language: cpp
-compiler:
-  - gcc
-  - clang
-os: linux
-
-script: ./bootstrap && ./configure && make
+language: objective-c
+xcode_project: SoundTouch.xcodeproj
+xcode_scheme: SoundTouch
