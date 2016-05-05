@@ -1,8 +1,7 @@
-* * *
-
 # SoundTouch audio processing library v1.8.0
+![Travis Build Status](https://travis-ci.org/rspeyer/soundtouch.svg?branch=master)
 
-SoundTouch library Copyright � Olli Parviainen 2001-2014
+SoundTouch library Copyright Olli Parviainen 2001-2014
 
 * * *
 
